@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { Button } from '../ui/Button'
 import { useAuthStore } from '../../store/useAuthStore'
@@ -18,6 +18,12 @@ export function Navbar() {
   const [modalOpen, setModalOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const avatarButtonRef = useRef<HTMLButtonElement>(null)
+
+  const closeDropdown = useCallback(() => {
+    setDropdownOpen(false)
+    avatarButtonRef.current?.focus()
+  }, [])
 
   useEffect(() => {
     const onMouseDown = (e: MouseEvent) => {
@@ -28,6 +34,16 @@ export function Navbar() {
     document.addEventListener('mousedown', onMouseDown)
     return () => document.removeEventListener('mousedown', onMouseDown)
   }, [])
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        closeDropdown()
+      }
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [closeDropdown])
 
   const handleLogout = () => {
     logout()
@@ -81,15 +97,18 @@ export function Navbar() {
 
             <div className="relative" ref={dropdownRef}>
               <button
+                ref={avatarButtonRef}
                 onClick={() => setDropdownOpen((v) => !v)}
                 className="w-8 h-8 rounded-full bg-primary text-white text-sm font-medium flex items-center justify-center hover:opacity-90 transition-opacity"
                 aria-label="アカウントメニュー"
+                aria-expanded={dropdownOpen}
+                aria-haspopup="menu"
               >
                 {avatarLabel}
               </button>
 
               {dropdownOpen && (
-                <div className="absolute right-0 top-10 w-52 bg-white rounded-2xl shadow-[0_8px_32px_rgba(26,28,31,0.12)] border border-outline-variant/20 py-2 z-50">
+                <div role="menu" className="absolute right-0 top-10 w-52 bg-white rounded-2xl shadow-[0_8px_32px_rgba(26,28,31,0.12)] border border-outline-variant/20 py-2 z-50">
                   {user && (
                     <div className="px-4 py-3 border-b border-outline-variant/15">
                       <p className="text-sm font-semibold text-on-surface truncate">{user.name}</p>
@@ -97,6 +116,7 @@ export function Navbar() {
                     </div>
                   )}
                   <button
+                    role="menuitem"
                     onClick={handleLogout}
                     className="w-full text-left px-4 py-3 text-sm text-error hover:bg-surface-low transition-colors"
                   >
