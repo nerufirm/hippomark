@@ -114,6 +114,8 @@ git add src/store/useAuthStore.ts
 git commit -m "feat: add useAuthStore with SHA-256 password hashing and localStorage persist"
 ```
 
+> **Note:** `localStorage.setItem` が `QuotaExceededError` をスローするケースは、スペックに従い本実装ではスコープ外とする（コンソールエラーのみ。UIトーストは将来対応）。
+
 ---
 
 ## Task 2: useBookmarkStore に persist を追加
@@ -219,6 +221,22 @@ Expected: エラーなし
 git add src/store/useBookmarkStore.ts
 git commit -m "feat: add persist middleware to useBookmarkStore (key: hippomark-bookmarks)"
 ```
+
+---
+
+## Task 2.5: Tailwind カスタムトークン確認
+
+**Files:**
+- Read: `tailwind.config.ts`
+
+- [ ] **Step 1: 以下のトークンが `tailwind.config.ts` に定義されていることを確認**
+
+```bash
+grep -E "surface-low|surface-dim|error|primary-container" /Users/nerufirm/開発/hippomark/tailwind.config.ts
+```
+
+Expected: `surface-low`, `surface-dim`, `error`, `primary-container` が全て出力される。
+もし欠けているトークンがあれば `tailwind.config.ts` の `colors` に追加してからコミットする。
 
 ---
 
