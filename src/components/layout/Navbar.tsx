@@ -37,13 +37,13 @@ export function Navbar() {
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === 'Escape' && dropdownOpen) {
         closeDropdown()
       }
     }
     document.addEventListener('keydown', onKeyDown)
     return () => document.removeEventListener('keydown', onKeyDown)
-  }, [closeDropdown])
+  }, [closeDropdown, dropdownOpen])
 
   const handleLogout = () => {
     logout()

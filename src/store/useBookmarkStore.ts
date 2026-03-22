@@ -30,6 +30,8 @@ interface BookmarkStore {
 export const useBookmarkStore = create<BookmarkStore>()(
   persist(
     (set) => ({
+      // MOCK DATA: Pre-populated for demo purposes. On first load (no localStorage key),
+      // these bookmarks appear as the user's initial data. This is intentional for the demo.
       bookmarks: MOCK_BOOKMARKS,
       searchQuery: '',
       activeCategory: null,
