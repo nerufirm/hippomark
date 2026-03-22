@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 360" fill="none">
+  <!-- Body -->
+  <ellipse cx="200" cy="230" rx="140" ry="100" fill="#c6c6cb"/>
+  <!-- Head -->
+  <ellipse cx="200" cy="140" rx="90" ry="75" fill="#c6c6cb"/>
+  <!-- Snout -->
+  <ellipse cx="200" cy="175" rx="55" ry="35" fill="#b0b0b5"/>
+  <!-- Nostrils -->
+  <ellipse cx="182" cy="168" rx="8" ry="5" fill="#909095"/>
+  <ellipse cx="218" cy="168" rx="8" ry="5" fill="#909095"/>
+  <!-- Eyes -->
+  <circle cx="165" cy="125" r="14" fill="white"/>
+  <circle cx="235" cy="125" r="14" fill="white"/>
+  <circle cx="168" cy="125" r="8" fill="#0058bc"/>
+  <circle cx="238" cy="125" r="8" fill="#0058bc"/>
+  <circle cx="170" cy="123" r="3" fill="white"/>
+  <circle cx="240" cy="123" r="3" fill="white"/>
+  <!-- Ears -->
+  <ellipse cx="120" cy="90" rx="22" ry="18" fill="#c6c6cb"/>
+  <ellipse cx="120" cy="90" rx="12" ry="10" fill="#b8b0c0"/>
+  <ellipse cx="280" cy="90" rx="22" ry="18" fill="#c6c6cb"/>
+  <ellipse cx="280" cy="90" rx="12" ry="10" fill="#b8b0c0"/>
+  <!-- Legs -->
+  <rect x="100" y="295" width="45" height="50" rx="22" fill="#b0b0b5"/>
+  <rect x="160" y="300" width="45" height="45" rx="22" fill="#b0b0b5"/>
+  <rect x="195" y="300" width="45" height="45" rx="22" fill="#b0b0b5"/>
+  <rect x="255" y="295" width="45" height="50" rx="22" fill="#b0b0b5"/>
+  <!-- Smile -->
+  <path d="M175 185 Q200 200 225 185" stroke="#909095" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Bookmark tag (accessory) -->
+  <rect x="240" y="60" width="30" height="40" rx="4" fill="#0058bc"/>
+  <path d="M240 100 L255 90 L270 100" fill="#0058bc"/>
+</svg>
