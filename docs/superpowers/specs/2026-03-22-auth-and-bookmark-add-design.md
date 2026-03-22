@@ -32,29 +32,34 @@ interface User {
 interface AuthStore {
   user: User | null
   // 登録済みユーザー一覧（localStorageに保存、モック認証用）
-  registeredUsers: Array<{ email: string; name: string; password: string }>
-  login: (email: string, password: string) => { success: boolean; error?: string }
-  register: (email: string, name: string, password: string) => { success: boolean; error?: string }
+  // パスワードは crypto.subtle で SHA-256 ハッシュ化して保存（平文保存禁止）
+  registeredUsers: Array<{ email: string; name: string; passwordHash: string }>
+  login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>
+  register: (email: string, name: string, password: string) => Promise<{ success: boolean; error?: string }>
   logout: () => void
 }
 ```
 
 - `persist` middleware でlocalStorage key `hippomark-auth` に永続化
 - `registeredUsers` もlocalStorageに保存（同一ブラウザで登録したユーザーがログインできる）
+- **パスワードハッシュ化:** `crypto.subtle.digest('SHA-256', ...)` でハッシュ化し、`passwordHash` として保存。比較時も同様にハッシュ化して照合。
 - **バリデーション:**
   - 登録: メール重複チェック、パスワード6文字以上、名前1文字以上
-  - ログイン: メール・パスワード一致チェック
+  - ログイン: メール・パスワード（ハッシュ照合）一致チェック
+- **登録成功後:** 自動ログインして `/app` にリダイレクト（ログインページに戻さない）
+- **localStorage `QuotaExceededError`:** 発生した場合はコンソールエラーを記録し、UIには「保存に失敗しました」トーストを表示（本実装ではスコープ外として最小対応）
 
 #### `src/store/useBookmarkStore.ts`（変更）
 
 - `persist` middleware を追加。localStorage key `hippomark-bookmarks` に永続化
 - `addBookmark` アクションはすでに実装済みのため変更不要
+- **既存localStorageキーとの競合:** 以前は `persist` なしで運用していたため競合するキーは存在しない。`hippomark-bookmarks` は新規キーとして安全に使用できる。
 
 ### ルーティング
 
 ```
-/              → LandingPage（認証不要）
-/login         → AuthPage（ログイン/登録タブ）
+/              → LandingPage（認証不要。ログイン済みでも表示可能。ランディングから「始める」クリック → /app で ProtectedRoute がチェック）
+/login         → AuthPage（未ログインのみ。ログイン済みなら /app にリダイレクト）
 /app           → ProtectedRoute → AppPage
 /dashboard     → ProtectedRoute → DashboardPage
 /categories    → ProtectedRoute → CategoryPage
@@ -63,6 +68,7 @@ interface AuthStore {
 
 - `ProtectedRoute` は `useAuthStore` の `user` を確認し、未ログインなら `/login` にリダイレクト
 - ログイン済みユーザーが `/login` にアクセスした場合は `/app` にリダイレクト
+- `/`（LandingPage）はログイン状態に関わらずそのまま表示（リダイレクトなし）
 
 ---
 
@@ -104,19 +110,37 @@ interface AuthStore {
 **フィールド:**
 | フィールド | 必須 | 備考 |
 |-----------|------|------|
-| URL | ✓ | `https://` で始まるか簡易チェック |
-| タイトル | — | 空の場合はURLのホスト名を自動設定 |
+| URL | ✓ | `http://` または `https://` で始まるか簡易チェック。不正な場合はフィールド下に赤テキストでエラー表示、送信はブロック |
+| タイトル | — | 空の場合はURLのホスト名（`new URL(url).hostname`）を自動設定 |
 | 説明 | — | 任意の自由テキスト |
-| カテゴリ | ✓ | MOCK_CATEGORIESのselectボックス |
+| カテゴリ | ✓ | `src/data/categories.ts` の `MOCK_CATEGORIES` をimportして `<select>` に表示 |
+
+**`addBookmark` に渡す型（既存の `Bookmark` 型）:**
+```ts
+// src/types/bookmark.ts
+interface Bookmark {
+  id: string        // crypto.randomUUID() で生成
+  title: string
+  url: string
+  description?: string
+  category: string
+  isFavourite: boolean   // 初期値 false
+  createdAt: string      // new Date().toISOString()
+  tags: string[]         // 初期値 []
+}
+```
 
 - 保存後、フォームをリセットしてモーダルを閉じる
 - `useBookmarkStore` の `addBookmark` を呼び出してストアに追加
 
 ### `src/components/layout/Navbar.tsx`（変更）
 
-- 「+ 追加」ボタンに `AddBookmarkModal` の開閉状態を追加
-- 右上のアカウントアバター（`H`）をクリックでログアウトメニュー表示（シンプルなドロップダウン）
-- ログイン中ユーザー名の頭文字をアバターに表示
+- `useState<boolean>` でモーダル開閉状態を管理（ローカル状態。将来キーボードショートカット等で別トリガーが必要になった場合はUIストアへ移行する）
+- 「+ 追加」ボタンでモーダル表示、`AddBookmarkModal` の `onClose` コールバックで閉じる
+- 右上アバターをクリックでログアウトドロップダウン表示（`useState<boolean>`で管理）
+  - ドロップダウン内容: ユーザー名・メール（表示のみ）、「ログアウト」ボタン
+  - ドロップダウン外クリックで閉じる（`useEffect` + `mousedown` イベント）
+- ログイン中ユーザー名の頭文字をアバターに表示（`useAuthStore` から取得）
 
 ---
 
