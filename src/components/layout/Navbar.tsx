@@ -3,10 +3,10 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { Button } from '../ui/Button'
 
 const NAV_LINKS = [
-  { to: '/app', label: 'All Bookmarks' },
-  { to: '/app?filter=recent', label: 'Recent' },
-  { to: '/app?filter=favourites', label: 'Favorites' },
-  { to: '/categories', label: 'Categories' },
+  { to: '/app', label: 'ブックマーク一覧' },
+  { to: '/app?filter=recent', label: '最近' },
+  { to: '/app?filter=favourites', label: 'お気に入り' },
+  { to: '/categories', label: 'カテゴリ' },
 ]
 
 export function Navbar() {
@@ -49,16 +49,16 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <button
             className="p-2 rounded-full text-on-surface-variant hover:bg-surface-high transition-colors"
-            aria-label="Search"
+            aria-label="検索"
           >
             🔍
           </button>
           <Button variant="primary" size="sm" onClick={() => navigate('/app')}>
-            + Add Bookmark
+            + 追加
           </Button>
           <button
             className="w-8 h-8 rounded-full bg-primary text-white text-sm font-medium flex items-center justify-center"
-            aria-label="Account"
+            aria-label="アカウント"
           >
             H
           </button>

@@ -6,9 +6,9 @@ export function StatsBar() {
   const categories = new Set(bookmarks.map((b) => b.category)).size
 
   const stats = [
-    { label: 'Total Bookmarks', value: bookmarks.length, icon: '📚' },
-    { label: 'Favourites', value: favourites, icon: '❤️' },
-    { label: 'Categories', value: categories, icon: '🗂️' },
+    { label: 'ブックマーク総数', value: bookmarks.length, icon: '📚' },
+    { label: 'お気に入り', value: favourites, icon: '❤️' },
+    { label: 'カテゴリ数', value: categories, icon: '🗂️' },
   ]
 
   return (

@@ -14,7 +14,7 @@ export function BookmarkCard({ bookmark }: BookmarkCardProps) {
         <h3 className="font-semibold text-on-surface leading-tight truncate">{bookmark.title}</h3>
         <button
           onClick={() => toggleFavourite(bookmark.id)}
-          aria-label={bookmark.isFavourite ? 'Remove from favourites' : 'Add to favourites'}
+          aria-label={bookmark.isFavourite ? 'お気に入りを解除' : 'お気に入りに追加'}
           className="flex-shrink-0 text-xl leading-none hover:scale-110 transition-transform"
         >
           {bookmark.isFavourite ? '❤️' : '🤍'}
@@ -42,10 +42,10 @@ export function BookmarkCard({ bookmark }: BookmarkCardProps) {
         </span>
         <button
           onClick={() => deleteBookmark(bookmark.id)}
-          aria-label="Delete bookmark"
+          aria-label="ブックマークを削除"
           className="text-xs text-on-surface-variant hover:text-error transition-colors"
         >
-          Delete
+          削除
         </button>
       </div>
     </div>

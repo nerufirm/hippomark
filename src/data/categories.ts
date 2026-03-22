@@ -7,10 +7,10 @@ export interface Category {
 }
 
 export const MOCK_CATEGORIES: Category[] = [
-  { id: 'dev', name: 'Development', icon: '💻', color: '#4A90E2', bookmarkCount: 12 },
-  { id: 'design', name: 'Design', icon: '🎨', color: '#F39C12', bookmarkCount: 8 },
-  { id: 'reading', name: 'Reading', icon: '📖', color: '#27AE60', bookmarkCount: 5 },
-  { id: 'tools', name: 'Tools', icon: '🔧', color: '#8E44AD', bookmarkCount: 7 },
-  { id: 'news', name: 'News', icon: '📰', color: '#E74C3C', bookmarkCount: 3 },
-  { id: 'misc', name: 'Miscellaneous', icon: '📦', color: '#95A5A6', bookmarkCount: 4 },
+  { id: 'dev', name: '開発', icon: '💻', color: '#0058bc', bookmarkCount: 4 },
+  { id: 'design', name: 'デザイン', icon: '🎨', color: '#9e3d00', bookmarkCount: 2 },
+  { id: 'reading', name: '読み物', icon: '📖', color: '#27AE60', bookmarkCount: 2 },
+  { id: 'tools', name: 'ツール', icon: '🔧', color: '#8E44AD', bookmarkCount: 2 },
+  { id: 'news', name: 'ニュース', icon: '📰', color: '#E74C3C', bookmarkCount: 1 },
+  { id: 'misc', name: 'その他', icon: '📌', color: '#717786', bookmarkCount: 0 },
 ]

@@ -6,7 +6,7 @@ export function Footer() {
           © 2026 HippoMark. All rights reserved.
         </p>
         <div className="flex items-center gap-6">
-          {['Privacy', 'Terms', 'Twitter', 'Support'].map((link) => (
+          {['プライバシー', '利用規約', 'Twitter', 'サポート'].map((link) => (
             <a
               key={link}
               href="#"

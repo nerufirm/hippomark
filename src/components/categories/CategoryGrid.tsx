@@ -22,7 +22,7 @@ export function CategoryGrid() {
           <span className="text-4xl">{cat.icon}</span>
           <div>
             <h3 className="font-semibold text-on-surface text-lg">{cat.name}</h3>
-            <p className="text-sm text-on-surface-variant">{cat.bookmarkCount} bookmarks</p>
+            <p className="text-sm text-on-surface-variant">{cat.bookmarkCount} 件</p>
           </div>
           <div
             className="h-1 rounded-full w-12"

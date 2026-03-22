@@ -1,37 +1,18 @@
 import { create } from 'zustand'
+import { useShallow } from 'zustand/react/shallow'
 import type { Bookmark } from '../types/bookmark'
 
 const MOCK_BOOKMARKS: Bookmark[] = [
-  {
-    id: '1',
-    title: 'React Documentation',
-    url: 'https://react.dev',
-    description: 'The official React documentation.',
-    category: 'dev',
-    isFavourite: true,
-    createdAt: '2024-01-01T00:00:00Z',
-    tags: ['react', 'docs'],
-  },
-  {
-    id: '2',
-    title: 'Tailwind CSS',
-    url: 'https://tailwindcss.com',
-    description: 'A utility-first CSS framework.',
-    category: 'design',
-    isFavourite: false,
-    createdAt: '2024-01-02T00:00:00Z',
-    tags: ['css', 'tailwind'],
-  },
-  {
-    id: '3',
-    title: 'Vite',
-    url: 'https://vitejs.dev',
-    description: 'Next generation frontend tooling.',
-    category: 'dev',
-    isFavourite: true,
-    createdAt: '2024-01-03T00:00:00Z',
-    tags: ['vite', 'build'],
-  },
+  { id: '1', title: 'React ドキュメント', url: 'https://react.dev', description: 'React公式ドキュメント', category: 'dev', isFavourite: true, createdAt: '2026-03-01', tags: ['react', 'docs'] },
+  { id: '2', title: 'Tailwind CSS', url: 'https://tailwindcss.com', description: 'ユーティリティファーストCSSフレームワーク', category: 'design', isFavourite: false, createdAt: '2026-03-02', tags: ['css', 'tailwind'] },
+  { id: '3', title: 'Vite', url: 'https://vitejs.dev', description: '次世代フロントエンドツール', category: 'dev', isFavourite: true, createdAt: '2026-03-03', tags: ['vite', 'build'] },
+  { id: '4', title: 'TypeScript ハンドブック', url: 'https://typescriptlang.org/docs', description: 'TypeScript公式ドキュメント', category: 'dev', isFavourite: false, createdAt: '2026-03-04', tags: ['typescript'] },
+  { id: '5', title: 'Figma', url: 'https://figma.com', description: 'デザインツール', category: 'design', isFavourite: true, createdAt: '2026-03-05', tags: ['design', 'tool'] },
+  { id: '6', title: 'GitHub', url: 'https://github.com', description: 'コードホスティング', category: 'tools', isFavourite: true, createdAt: '2026-03-06', tags: ['git', 'code'] },
+  { id: '7', title: 'Vercel', url: 'https://vercel.com', description: 'フロントエンドデプロイサービス', category: 'tools', isFavourite: false, createdAt: '2026-03-07', tags: ['deploy', 'hosting'] },
+  { id: '8', title: 'Hacker News', url: 'https://news.ycombinator.com', description: 'テックニュース', category: 'news', isFavourite: false, createdAt: '2026-03-08', tags: ['news'] },
+  { id: '9', title: 'Zenn', url: 'https://zenn.dev', description: '日本のエンジニア向け情報共有サービス', category: 'reading', isFavourite: true, createdAt: '2026-03-09', tags: ['tech', 'japanese'] },
+  { id: '10', title: 'Qiita', url: 'https://qiita.com', description: 'エンジニアの知識共有コミュニティ', category: 'reading', isFavourite: false, createdAt: '2026-03-10', tags: ['tech', 'japanese'] },
 ]
 
 interface BookmarkStore {
@@ -66,18 +47,20 @@ export const useBookmarkStore = create<BookmarkStore>((set) => ({
 }))
 
 export function useFilteredBookmarks() {
-  return useBookmarkStore((state) => {
-    const { bookmarks, searchQuery, activeCategory } = state
-    return bookmarks.filter((b) => {
-      const matchesCategory = !activeCategory || b.category === activeCategory
-      const q = searchQuery.toLowerCase()
-      const matchesSearch =
-        !q ||
-        b.title.toLowerCase().includes(q) ||
-        b.url.toLowerCase().includes(q) ||
-        (b.description?.toLowerCase().includes(q) ?? false) ||
-        b.tags.some((t) => t.toLowerCase().includes(q))
-      return matchesCategory && matchesSearch
+  return useBookmarkStore(
+    useShallow((state) => {
+      const { bookmarks, searchQuery, activeCategory } = state
+      return bookmarks.filter((b) => {
+        const matchesCategory = !activeCategory || b.category === activeCategory
+        const q = searchQuery.toLowerCase()
+        const matchesSearch =
+          !q ||
+          b.title.toLowerCase().includes(q) ||
+          b.url.toLowerCase().includes(q) ||
+          (b.description?.toLowerCase().includes(q) ?? false) ||
+          b.tags.some((t) => t.toLowerCase().includes(q))
+        return matchesCategory && matchesSearch
+      })
     })
-  })
+  )
 }

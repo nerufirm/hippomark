@@ -4,7 +4,7 @@ interface SearchBarProps {
   placeholder?: string
 }
 
-export function SearchBar({ value, onChange, placeholder = 'Search bookmarks...' }: SearchBarProps) {
+export function SearchBar({ value, onChange, placeholder = 'ブックマークを検索...' }: SearchBarProps) {
   return (
     <div className="relative flex items-center">
       <span className="absolute left-4 text-on-surface-variant" aria-hidden="true">🔍</span>

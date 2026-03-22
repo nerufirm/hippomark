@@ -1,60 +1,31 @@
 export const LANDING_CONTENT = {
   hero: {
-    badge: 'Always within reach',
-    headline: 'Keep your favorites afloat',
-    subheadline: 'HippoMark is a bookmark manager that helps you organize, discover, and revisit your favorite links with ease.',
-    body: 'Save time searching for that one link. Tag, categorize, and sync across all your devices. Your bookmarks, always in pocket.',
-    ctaPrimary: 'Get Started',
-    ctaSecondary: 'View Dashboard',
+    badge: '✦ ブックマーク管理',
+    headline: 'お気に入りを、いつでも手元に',
+    subheadline: 'デジタルの世界を整理する、もっとも簡単な方法',
+    body: '軽量で使いやすい。あなたのブックマーク管理をシンプルに。',
+    ctaPrimary: '始める',
+    ctaSecondary: 'デモを見る',
   },
   features: {
-    title: 'Everything you need',
+    title: 'なぜ HippoMark？',
     items: [
-      {
-        icon: '🏷️',
-        title: 'Smart Tagging',
-        description: 'Organize bookmarks with flexible tags and categories. Never lose track of your links again.',
-      },
-      {
-        icon: '🔍',
-        title: 'Quick Search',
-        description: 'Find any bookmark instantly with powerful full-text search across titles, descriptions, and tags.',
-      },
-      {
-        icon: '☁️',
-        title: 'Cloud Sync',
-        description: 'Access your bookmarks from any device. Changes sync automatically across all platforms.',
-      },
+      { icon: '🧠', title: 'スマート分類', description: '高度な意味解析であなたのリンクを自動グループ化します。' },
+      { icon: '☁️', title: 'クラウド同期', description: 'どのデバイスからでも、いつでもブックマークにアクセス。' },
+      { icon: '🔒', title: 'カバセキュリティ', description: 'デフォルトでプライベート。データはエンドツーエンドで暗号化。' },
     ],
   },
   perks: {
-    title: 'Why choose HippoMark?',
+    title: '軽やかな使い心地',
     items: [
-      {
-        icon: '✨',
-        label: 'Lightweight & Fast',
-        description: 'No bloat, no slowdowns. A snappy interface designed for quick access to your bookmarks.',
-      },
-      {
-        icon: '🔒',
-        label: 'Privacy First',
-        description: 'Your bookmarks are yours. We never sell your data, and all your links stay secure.',
-      },
-      {
-        icon: '📱',
-        label: 'Works Everywhere',
-        description: 'Browser extension, web app, and mobile—HippoMark goes wherever you do.',
-      },
-      {
-        icon: '🎨',
-        label: 'Beautiful Design',
-        description: 'A clean, intuitive interface that makes managing bookmarks a pleasure, not a chore.',
-      },
+      { icon: '✓', label: '広告ゼロ', description: '邪魔なものは一切なし。' },
+      { icon: '✓', label: 'ワンクリック保存', description: '1秒以内にどんなページも保存。' },
+      { icon: '✓', label: 'API連携', description: '既存のワークフローにシームレスに統合。' },
     ],
   },
   cta: {
-    headline: 'Ready to keep your bookmarks afloat?',
-    sub: 'Join thousands of users who have found their perfect bookmark home.',
-    button: 'Start Free Today',
+    headline: 'あなたのアンカーを見つけよう',
+    sub: '50,000人以上のユーザーが HippoMark を信頼しています。',
+    button: '無料でアカウント作成',
   },
 }

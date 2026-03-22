@@ -20,7 +20,7 @@ export function BookmarkList() {
           </span>
           <button
             onClick={() => toggleFavourite(b.id)}
-            aria-label={b.isFavourite ? 'Unfavourite' : 'Favourite'}
+            aria-label={b.isFavourite ? 'お気に入り解除' : 'お気に入り追加'}
           >
             {b.isFavourite ? '❤️' : '🤍'}
           </button>
