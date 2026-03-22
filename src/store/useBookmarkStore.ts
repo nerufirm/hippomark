@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 import { useShallow } from 'zustand/react/shallow'
 import type { Bookmark } from '../types/bookmark'
 
@@ -26,25 +27,33 @@ interface BookmarkStore {
   addBookmark: (bookmark: Bookmark) => void
 }
 
-export const useBookmarkStore = create<BookmarkStore>((set) => ({
-  bookmarks: MOCK_BOOKMARKS,
-  searchQuery: '',
-  activeCategory: null,
-  setSearchQuery: (q) => set({ searchQuery: q }),
-  setActiveCategory: (id) => set({ activeCategory: id }),
-  toggleFavourite: (id) =>
-    set((state) => ({
-      bookmarks: state.bookmarks.map((b) =>
-        b.id === id ? { ...b, isFavourite: !b.isFavourite } : b
-      ),
-    })),
-  deleteBookmark: (id) =>
-    set((state) => ({
-      bookmarks: state.bookmarks.filter((b) => b.id !== id),
-    })),
-  addBookmark: (bookmark) =>
-    set((state) => ({ bookmarks: [bookmark, ...state.bookmarks] })),
-}))
+export const useBookmarkStore = create<BookmarkStore>()(
+  persist(
+    (set) => ({
+      bookmarks: MOCK_BOOKMARKS,
+      searchQuery: '',
+      activeCategory: null,
+      setSearchQuery: (q) => set({ searchQuery: q }),
+      setActiveCategory: (id) => set({ activeCategory: id }),
+      toggleFavourite: (id) =>
+        set((state) => ({
+          bookmarks: state.bookmarks.map((b) =>
+            b.id === id ? { ...b, isFavourite: !b.isFavourite } : b
+          ),
+        })),
+      deleteBookmark: (id) =>
+        set((state) => ({
+          bookmarks: state.bookmarks.filter((b) => b.id !== id),
+        })),
+      addBookmark: (bookmark) =>
+        set((state) => ({ bookmarks: [bookmark, ...state.bookmarks] })),
+    }),
+    {
+      name: 'hippomark-bookmarks',
+      partialize: (state) => ({ bookmarks: state.bookmarks }),
+    }
+  )
+)
 
 export function useFilteredBookmarks() {
   return useBookmarkStore(
