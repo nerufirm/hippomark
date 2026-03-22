@@ -1,7 +1,8 @@
+import { useShallow } from 'zustand/react/shallow'
 import { useBookmarkStore } from '../../store/useBookmarkStore'
 
 export function BookmarkList() {
-  const bookmarks = useBookmarkStore((s) => s.bookmarks.slice(0, 8))
+  const bookmarks = useBookmarkStore(useShallow((s) => s.bookmarks.slice(0, 8)))
   const toggleFavourite = useBookmarkStore((s) => s.toggleFavourite)
 
   return (
