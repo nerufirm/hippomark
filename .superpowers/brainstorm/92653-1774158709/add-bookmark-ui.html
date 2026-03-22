@@ -1,0 +1,86 @@
+<h2>ブックマーク追加UIのスタイル</h2>
+<p class="subtitle">「+ 追加」ボタンを押したときの動作はどれがよいですか？</p>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f3f3f8;padding:12px;position:relative;min-height:200px;overflow:hidden">
+      <!-- App behind -->
+      <div style="filter:blur(2px);opacity:0.4;font-size:0.7rem;padding:4px 8px;background:#fff;border-radius:8px;margin-bottom:6px;color:#555">ブックマーク一覧...</div>
+      <!-- Modal overlay -->
+      <div style="position:absolute;inset:0;background:rgba(26,28,31,0.4);border-radius:12px;display:flex;align-items:center;justify-content:center">
+        <div style="background:white;border-radius:20px;padding:20px;width:85%;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
+          <div style="font-weight:700;font-size:0.9rem;color:#1a1c1f;margin-bottom:12px">ブックマークを追加</div>
+          <div style="font-size:0.7rem;color:#666;margin-bottom:4px">URL</div>
+          <div style="background:#f3f3f8;border-radius:8px;padding:8px 10px;margin-bottom:8px;font-size:0.75rem;color:#999">https://...</div>
+          <div style="font-size:0.7rem;color:#666;margin-bottom:4px">タイトル</div>
+          <div style="background:#f3f3f8;border-radius:8px;padding:8px 10px;margin-bottom:8px;font-size:0.75rem;color:#999">ページタイトル</div>
+          <div style="font-size:0.7rem;color:#666;margin-bottom:4px">カテゴリ</div>
+          <div style="background:#f3f3f8;border-radius:8px;padding:8px 10px;margin-bottom:12px;font-size:0.75rem;color:#999">開発 ▾</div>
+          <div style="background:linear-gradient(135deg,#0058bc,#0070eb);color:white;border-radius:99px;padding:8px;text-align:center;font-size:0.8rem;font-weight:600">保存</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A: オーバーレイモーダル</h3>
+      <p>背景を暗くしてフォームを中央表示。一般的で使いやすい。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f3f3f8;padding:0;min-height:200px;display:flex;overflow:hidden;border-radius:12px 12px 0 0">
+      <!-- Main content -->
+      <div style="flex:1;padding:12px;font-size:0.7rem;color:#888">
+        <div style="background:#e8e8ed;border-radius:6px;height:14px;margin-bottom:6px;width:70%"></div>
+        <div style="background:#e8e8ed;border-radius:6px;height:14px;margin-bottom:6px;width:50%"></div>
+        <div style="background:#e8e8ed;border-radius:6px;height:14px;width:60%"></div>
+      </div>
+      <!-- Side drawer -->
+      <div style="width:55%;background:white;box-shadow:-4px 0 20px rgba(0,0,0,0.12);padding:14px;display:flex;flex-direction:column;gap:8px">
+        <div style="font-weight:700;font-size:0.85rem;color:#1a1c1f">追加</div>
+        <div>
+          <div style="font-size:0.65rem;color:#666;margin-bottom:3px">URL</div>
+          <div style="background:#f3f3f8;border-radius:6px;padding:6px 8px;font-size:0.7rem;color:#999">https://...</div>
+        </div>
+        <div>
+          <div style="font-size:0.65rem;color:#666;margin-bottom:3px">タイトル</div>
+          <div style="background:#f3f3f8;border-radius:6px;padding:6px 8px;font-size:0.7rem;color:#999">タイトル</div>
+        </div>
+        <div>
+          <div style="font-size:0.65rem;color:#666;margin-bottom:3px">カテゴリ</div>
+          <div style="background:#f3f3f8;border-radius:6px;padding:6px 8px;font-size:0.7rem;color:#999">開発 ▾</div>
+        </div>
+        <div style="background:linear-gradient(135deg,#0058bc,#0070eb);color:white;border-radius:99px;padding:7px;text-align:center;font-size:0.75rem;font-weight:600;margin-top:4px">保存</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B: 右サイドドロワー</h3>
+      <p>右からスライドイン。一覧を見ながら追加できる。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f3f3f8;padding:12px;min-height:200px">
+      <!-- Inline top form -->
+      <div style="background:white;border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 4px 16px rgba(0,0,0,0.08);border:2px solid #0058bc">
+        <div style="font-weight:700;font-size:0.8rem;color:#1a1c1f;margin-bottom:10px">🔖 新しいブックマーク</div>
+        <div style="display:flex;gap:6px;margin-bottom:6px">
+          <div style="flex:1;background:#f3f3f8;border-radius:8px;padding:7px 10px;font-size:0.7rem;color:#999">URL を貼り付け...</div>
+          <div style="background:#f3f3f8;border-radius:8px;padding:7px 10px;font-size:0.7rem;color:#999">開発 ▾</div>
+        </div>
+        <div style="display:flex;gap:6px">
+          <div style="flex:1;background:#f3f3f8;border-radius:8px;padding:7px 10px;font-size:0.7rem;color:#999">タイトル（任意）</div>
+          <div style="background:linear-gradient(135deg,#0058bc,#0070eb);color:white;border-radius:8px;padding:7px 14px;font-size:0.75rem;font-weight:600">保存</div>
+        </div>
+      </div>
+      <!-- Cards below -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+        <div style="background:#e8e8ed;border-radius:10px;height:40px"></div>
+        <div style="background:#e8e8ed;border-radius:10px;height:40px"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C: インラインフォーム（一覧上部）</h3>
+      <p>ページ遷移なしで一覧の上にフォームを展開。</p>
+    </div>
+  </div>
+</div>

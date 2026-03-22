@@ -1,0 +1,29 @@
+<h2>追加する機能の範囲を決めましょう</h2>
+<p class="subtitle">どのレベルの実装を想定していますか？</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>フロントのみ（モック）</h3>
+      <p>ログイン・登録フォームのUI＋ブックマーク追加モーダルを実装。認証はZustandで状態管理（ページリロードでリセット）。バックエンドなし。</p>
+      <p style="margin-top:8px;font-size:0.8em;color:#666">✓ 今日中に完成 &nbsp;✓ 追加依存関係なし</p>
+    </div>
+  </div>
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>localStorage永続化あり</h3>
+      <p>フロントのみだがlocalStorageに保存。リロードしてもブックマーク・ログイン状態が残る。zustand-persistを使用。</p>
+      <p style="margin-top:8px;font-size:0.8em;color:#666">✓ リロード後も保持 &nbsp;✓ バックエンド不要</p>
+    </div>
+  </div>
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Supabase連携（本格実装）</h3>
+      <p>Supabase Auth＋Databaseでリアルな認証・データ永続化。メール登録・ログイン・ブックマークのCRUD。</p>
+      <p style="margin-top:8px;font-size:0.8em;color:#666">✓ 本番品質 &nbsp;⚠ Supabaseプロジェクト設定が必要</p>
+    </div>
+  </div>
+</div>
