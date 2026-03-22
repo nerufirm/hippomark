@@ -56,6 +56,10 @@ export const useAuthStore = create<AuthStore>()(
         if (name.trim().length === 0) {
           return { success: false, error: '名前を入力してください' }
         }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!emailRegex.test(email)) {
+          return { success: false, error: 'メールアドレスの形式が正しくありません' }
+        }
         const passwordHash = await hashPassword(password)
         const newUser: RegisteredUser = { email, name: name.trim(), passwordHash }
         set((state) => ({
